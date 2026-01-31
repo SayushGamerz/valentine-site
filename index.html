@@ -57,7 +57,7 @@ button{
     border:none;
     border-radius:30px;
     cursor:pointer;
-    transition:transform .2s;
+    transition:transform .25s ease;
 }
 
 #yes{
@@ -113,7 +113,7 @@ button{
 
 <div class="card" id="card">
     <h1>Will you be my Valentine? 💌</h1>
-    <div class="note">(u dont really have an option.. u can try clicking NO if u want</div>
+    <div class="note">NO is not an option(try it)</div>
 
     <div class="buttons">
         <button id="yes">Yes</button>
@@ -122,13 +122,19 @@ button{
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
+const noBtn  = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
-const card  = document.getElementById("card");
+const card   = document.getElementById("card");
 
-/* make NO run away (desktop + mobile) */
+let yesScale = 1;
+
+/* No runs away AND makes Yes bigger (desktop + mobile) */
 ["mouseenter","touchstart"].forEach(evt => {
   noBtn.addEventListener(evt, () => {
+
+    // grow YES every time she tries NO
+    yesScale += 0.15;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
     const cardRect = card.getBoundingClientRect();
 
@@ -148,8 +154,8 @@ const card  = document.getElementById("card");
 yesBtn.addEventListener("click", () => {
     card.innerHTML = `
         <div class="success">
-            Hehehehehehhe❤️..Happy Valentines Chikudi<br><br>
-            See you this Valentine (even from far away).
+            Hehhehehehee❤️<br><br>
+            See you this Valentine piyu (even from far away).
         </div>
     `;
 });
